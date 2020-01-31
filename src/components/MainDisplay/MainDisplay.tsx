@@ -4,6 +4,7 @@ import HeaderSection from '../AboutSection'
 import ServicesSection from '../ServicesSection'
 import SocialLinksSection from '../SocialLinksSection'
 import ReviewsSection from '../ReviewsSection'
+import OtherEventsSection from '../OtherEventsSection'
 
 const MainDisplay: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const MainDisplay: React.FC = () => {
       <ServicesSection/>
       <SocialLinksSection />
       <ReviewsSection />
+      <OtherEventsSection />
     </Styled.MainDisplay>
   )
 }
