@@ -10,7 +10,6 @@ const MainDisplay = styled('main')<Props>(({ theme }) => css`
   flex-direction: column;
   align-items: center;
   width: calc(100vw - 400px);
-  min-height: 100vh;
   background: white;
 `);
 
