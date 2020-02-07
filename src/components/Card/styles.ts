@@ -13,7 +13,7 @@ const Card = styled('div')(({ theme }) => css`
   height: 166px;
   padding: 18px;
   padding-top: 28px;
-  margin-bottom: 10px;
+  margin-top: 10px;
 
   h2 {
     font-size: 20px;

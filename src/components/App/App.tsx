@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Styled } from './styles';
 import Header from '../Header';
 import MenuBar from '../MenuBar';
@@ -7,8 +7,12 @@ import Card from '../Card';
 import ServicesSection from '../ServicesSection';
 import ReviewSection from '../ReviewSection/ReviewSection';
 import Footer from '../Footer';
+import RepairForm from '../RepairForm';
 
 const App = () => {
+
+  const [ repairFormOpen, setRepairFormOpen ] = useState<boolean>(false);
+
   return (
     <Styled.App>
      <Header />
@@ -19,8 +23,9 @@ const App = () => {
        <p>
         Complete the guitar repair form following the link below.
        </p>
-       <button>Repair Form</button>
+       <button onClick={() => setRepairFormOpen(!repairFormOpen)}>Repair Form</button>
      </Card>
+     <RepairForm open={repairFormOpen}/>
      <Card>
        <h2>Step 2</h2>
        <p>

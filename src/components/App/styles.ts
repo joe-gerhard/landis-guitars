@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
 import { Theme } from '../../styles/theme';
 
-type Props = {
+type AppProps = {
   theme: Theme;
 }
 
-const App = styled('div')<Props>(({ theme }) => css`
+const App = styled('div')<AppProps>(({ theme }) => css`
  
 `);
 
