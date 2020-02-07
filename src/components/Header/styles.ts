@@ -1,15 +1,15 @@
 import styled, { css } from 'styled-components';
 import { Theme } from '../../styles/theme';
 
-type ServiceSectionProps = {
+type HeaderProps = {
   theme: Theme;
 }
 
-const ServiceSection = styled('section')<ServiceSectionProps>(({ theme }) => css`
-  display: flex;
+const Header = styled('header')<HeaderProps>(({ theme }) => css`
+  display: flex; 
   flex-direction: column;
-  padding: 0 17px;
-  margin: 48px 0;
+  align-items: center;
+  margin: 25px 0;
 
   h1 {
     font-size: 20px;
@@ -21,5 +21,6 @@ const ServiceSection = styled('section')<ServiceSectionProps>(({ theme }) => css
 `);
 
 export const Styled = {
-  ServiceSection,
+  Header,
+
 }

@@ -1,13 +1,45 @@
 import React from 'react';
 import { Styled } from './styles';
-import CTABar from '../CTABar';
-import MainDisplay from '../MainDisplay';
+import Header from '../Header';
+import MenuBar from '../MenuBar';
+import AboutSection from '../AboutSection';
+import Card from '../Card';
+import ServicesSection from '../ServicesSection';
+import ReviewSection from '../ReviewSection/ReviewSection';
+import Footer from '../Footer';
 
 const App = () => {
   return (
     <Styled.App>
-      <CTABar />
-      <MainDisplay />
+     <Header />
+     <MenuBar />
+     <AboutSection />
+     <Card>
+       <h2>Step 1</h2>
+       <p>
+        Complete the guitar repair form following the link below.
+       </p>
+       <button>Repair Form</button>
+     </Card>
+     <Card>
+       <h2>Step 2</h2>
+       <p>
+         We will review your form and give you a call to schedule a 
+         complimentary evaluation.
+       </p>
+     </Card>
+     <Card>
+       <h2>Step 3</h2>
+       <p>
+        Bring your guitar in to our shop. We will complete the evaluation 
+        in person, talk you through a repair plan and give you a quote. 
+        Your baby is safe in our hands. We will call you when it’s ready 
+        to be picked up.
+       </p>
+     </Card>
+     <ServicesSection />
+     <ReviewSection />
+     <Footer />
     </Styled.App>
   );
 }

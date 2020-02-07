@@ -1,32 +1,26 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Theme } from '../../styles/theme';
 
-const AboutSection = styled.section`
-  display: flex;
-  width: 100%;
-`;
+type AboutSectionProps = {
+  theme: Theme;
+}
 
-const AboutContainer = styled.div`
-  width: 50%;
-  display: flex;
+const AboutSection = styled('section')<AboutSectionProps>(({ theme }) => css`
+  display: flex; 
   flex-direction: column;
-  align-items: center;
-  padding: 40px;
-`;
+  align-items: flex-start;
+  padding: 0 17px;
+  margin: 25px 0;
 
-const ImageContainer = styled.div`
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  padding: 40px;
-
-  img {
-    width: 80%;
-    object-fit: scale-down;
+  h1 { 
+    font-size: 20px;
   }
-`;
- 
+
+  p {
+    font-size: 12px;
+  }
+`);
+
 export const Styled = {
   AboutSection,
-  AboutContainer,
-  ImageContainer,
 }
