@@ -47,6 +47,7 @@ const RepairForm = styled('div')<RepairFormProps>(({ theme, open }) => css`
     margin: 5px auto;
     width: 150px;
     height: 42px;
+    min-height: 42px;
     background: #F2F2F2;
     border-radius: 5px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
