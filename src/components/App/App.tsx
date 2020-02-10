@@ -12,7 +12,7 @@ import RepairForm from '../RepairForm';
 const App = () => {
 
   const [ repairFormOpen, setRepairFormOpen ] = useState<boolean>(false);
-
+  
   return (
     <Styled.App>
      <Header />
