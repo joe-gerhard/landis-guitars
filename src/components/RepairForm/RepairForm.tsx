@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, ChangeEvent } from 'react'
 import { Styled } from './styles'
-import firebase from '../../util/firebase'
+import { db } from '../../util/firebase'
 
 type RepairFormProps = {
   open: boolean; 
@@ -12,6 +12,7 @@ type RepairFormState = {
   phoneNumber: string;
   email: string;
   note: string;
+  date: string;
 }
 
 const InitialRepairFormState: RepairFormState = {
@@ -20,6 +21,7 @@ const InitialRepairFormState: RepairFormState = {
   phoneNumber: '',
   email: '',
   note: '',
+  date: '',
 }
 
 const RepairForm : React.FC<RepairFormProps> = ({ open }) => {
@@ -35,30 +37,65 @@ const RepairForm : React.FC<RepairFormProps> = ({ open }) => {
     
   }
 
+  const normalizeInput = (value: string, previousValue: string): string => {
+    
+    // only allows 0-9 inputs
+    const currentValue = value.replace(/[^\d]/g, '');
+    const cvLength = currentValue.length; 
+  
+    if (!previousValue || value.length > previousValue.length) {
+  
+      // returns: "x", "xx", "xxx"
+      if (cvLength < 4) return currentValue; 
+  
+      // returns: "(xxx)", "(xxx) x", "(xxx) xx", "(xxx) xxx",
+      if (cvLength < 7) return `(${currentValue.slice(0, 3)}) ${currentValue.slice(3)}`; 
+  
+      // returns: "(xxx) xxx-", (xxx) xxx-x", "(xxx) xxx-xx", "(xxx) xxx-xxx", "(xxx) xxx-xxxx"
+      return `(${currentValue.slice(0, 3)}) ${currentValue.slice(3, 6)}-${currentValue.slice(6, 10)}`; 
+    }
+
+    return value;
+  };
+
+  const handleChangePhoneNumber: React.EventHandler<ChangeEvent<HTMLInputElement>> = ({ target: { value }}): void => {
+
+    const prevValue = formState.phoneNumber;
+
+    setFormState({
+      ...formState,
+      phoneNumber: normalizeInput(value, prevValue)
+    })
+  }
+
+  const validatePhoneNumber = (value: string): string => {
+    let error = ""
+    
+    if (!value) error = "Required!"
+    else if (value.length !== 14) error = "Invalid phone format. ex: (555) 555-5555";
+    
+    return error;
+  };
+
+  const isFormValid = (): boolean => {
+
+    return !!(formState.firstName && formState.lastName && formState.phoneNumber && formState.email) 
+  }
+
   const handleSubmitFormData = (): void => {
-    const db = firebase.firestore();
-    // console.log(db)
+    
+    if(isFormValid()) {
 
-    db.collection('messages').add(formState)
-    .then(onfulfilled => {
-      console.log(onfulfilled.id)
-    })
-    .catch(onrejected => {
-      console.log(onrejected)
-    })
-
-    // db.collection('messages').get()
-    // .then(query => {
-    //   query.forEach(doc => {
-    //     console.log(doc.data)
-    //   })
-    // })
-    // .catch(err => {
-    //   console.log(err.message);
-    // })
-
-    setFormState(InitialRepairFormState);
-
+      db.collection('messages').add({
+        ...formState,
+        date: new Date().toLocaleString()
+      })
+  
+      setFormState(InitialRepairFormState);
+    }
+    else {
+      console.log('please complete form')
+    }
   }
 
   return (
@@ -70,7 +107,7 @@ const RepairForm : React.FC<RepairFormProps> = ({ open }) => {
       </p>
       <input name="firstName" value={formState.firstName} type="text" placeholder="First name" onChange={handleChange} />
       <input name="lastName" value={formState.lastName} type="text" placeholder="Last name" onChange={handleChange} />
-      <input name="phoneNumber" value={formState.phoneNumber} type="text" placeholder="Phone" onChange={handleChange} />
+      <input name="phoneNumber" value={formState.phoneNumber} type="text" placeholder="Phone" onChange={handleChangePhoneNumber} />
       <input name="email" value={formState.email} type="text" placeholder="Email" onChange={handleChange} />
       <p>
         Give me an idea of what’s going on with your guitar and I will 
@@ -83,3 +120,4 @@ const RepairForm : React.FC<RepairFormProps> = ({ open }) => {
 }
 
 export default RepairForm
+
