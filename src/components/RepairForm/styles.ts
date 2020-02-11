@@ -57,7 +57,7 @@ const Error = styled('div')<RepairFormProps>(({ theme, showError }) => css`
   color: ${showError ? 'red' : 'white'};
   font-size: 12px;
   padding: 5px 3px;
-  height: 30px;
+  min-height: 30px;
 
   &:last-of-type {
     margin-bottom: 20px;
