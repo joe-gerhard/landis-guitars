@@ -4,6 +4,7 @@ import { Theme } from '../../styles/theme';
 type RepairFormProps = {
   theme: Theme;
   open?: boolean;
+  showError?: string;
 }
 
 const RepairForm = styled('div')<RepairFormProps>(({ theme, open }) => css`
@@ -30,11 +31,7 @@ const RepairForm = styled('div')<RepairFormProps>(({ theme, open }) => css`
     border-bottom: 1px solid black;
     padding: 5px 3px;
     padding-bottom: 1px;
-    margin-top: 20px;
-
-    &:last-of-type {
-      margin-bottom: 40px;
-    }
+    font-size: 12px;
   }
 
   textarea {
@@ -54,6 +51,20 @@ const RepairForm = styled('div')<RepairFormProps>(({ theme, open }) => css`
   }
 `);
 
+const Error = styled('div')<RepairFormProps>(({ theme, showError }) => css`
+  display: flex;
+  flex-direction: column;
+  color: ${showError ? 'red' : 'white'};
+  font-size: 12px;
+  padding: 5px 3px;
+  height: 30px;
+
+  &:last-of-type {
+    margin-bottom: 20px;
+  }
+`);
+
 export const Styled = {
   RepairForm,
+  Error,
 }

@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent } from 'react'
 import { Styled } from './styles'
 import { db } from '../../util/firebase'
+import Error from './Error';
 
 type RepairFormProps = {
   open: boolean; 
@@ -15,7 +16,14 @@ type RepairFormState = {
   date: string;
 }
 
-const InitialRepairFormState: RepairFormState = {
+type RepairFormErrors = {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+}
+
+const initialRepairFormState: RepairFormState = {
   firstName: '',
   lastName: '',
   phoneNumber: '',
@@ -24,9 +32,17 @@ const InitialRepairFormState: RepairFormState = {
   date: '',
 }
 
+const initialRepairFormErrors: RepairFormErrors = {
+  firstName: '',
+  lastName: '',
+  phoneNumber: '',
+  email: '',
+}
+
 const RepairForm : React.FC<RepairFormProps> = ({ open }) => {
   
-  const [ formState, setFormState ] = useState<RepairFormState>(InitialRepairFormState)
+  const [ formState, setFormState ] = useState<RepairFormState>(initialRepairFormState)
+  const [ errors, setErrors ] = useState<RepairFormErrors>(initialRepairFormErrors)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
 
@@ -68,18 +84,44 @@ const RepairForm : React.FC<RepairFormProps> = ({ open }) => {
     })
   }
 
+  const validateName = (value: string): string => {
+    let error = ''
+
+    if(!value) error = 'Required!'
+
+    return error;
+  }
+
   const validatePhoneNumber = (value: string): string => {
-    let error = ""
+    let error = ''
     
-    if (!value) error = "Required!"
-    else if (value.length !== 14) error = "Invalid phone format. ex: (555) 555-5555";
+    if (!value) error = 'Required!'
+    else if (value.length !== 14) error = 'Invalid phone format. ex: (555) 555-5555';
     
     return error;
   };
 
+  const validateEmail = (value: string): string => {
+    let error = '';
+
+    if(!value) error = 'Required!'
+    
+    return error;
+  }
+
   const isFormValid = (): boolean => {
 
-    return !!(formState.firstName && formState.lastName && formState.phoneNumber && formState.email) 
+    let tempErrors = {
+      ...errors,
+      firstName: validateName(formState.firstName),
+      lastName: validateName(formState.lastName),
+      phoneNumber: validatePhoneNumber(formState.phoneNumber),
+      email: validateEmail(formState.email),
+    }
+
+    setErrors(tempErrors);
+    
+    return !(tempErrors.phoneNumber || tempErrors.firstName || tempErrors.lastName || tempErrors.email)
   }
 
   const handleSubmitFormData = (): void => {
@@ -91,7 +133,7 @@ const RepairForm : React.FC<RepairFormProps> = ({ open }) => {
         date: new Date().toLocaleString()
       })
   
-      setFormState(InitialRepairFormState);
+      setFormState(initialRepairFormState);
     }
     else {
       console.log('please complete form')
@@ -106,9 +148,13 @@ const RepairForm : React.FC<RepairFormProps> = ({ open }) => {
         that works for you to bring your baby in and talk shop.
       </p>
       <input name="firstName" value={formState.firstName} type="text" placeholder="First name" onChange={handleChange} />
+      <Error error={errors.firstName} />
       <input name="lastName" value={formState.lastName} type="text" placeholder="Last name" onChange={handleChange} />
+      <Error error={errors.lastName} />
       <input name="phoneNumber" value={formState.phoneNumber} type="text" placeholder="Phone" onChange={handleChangePhoneNumber} />
+      <Error error={errors.phoneNumber} />
       <input name="email" value={formState.email} type="text" placeholder="Email" onChange={handleChange} />
+      <Error error={errors.email} />
       <p>
         Give me an idea of what’s going on with your guitar and I will 
         get right back. 
