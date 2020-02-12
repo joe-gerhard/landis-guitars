@@ -17,8 +17,7 @@ const ReviewContainer = styled('div')<ReviewSectionProps>(({ theme }) => css`
   scroll-snap-type: x mandatory;
 
   ::-webkit-scrollbar {
-    width: 0px; 
-    background: transparent; 
+    display: none;
   }
 
 `);
