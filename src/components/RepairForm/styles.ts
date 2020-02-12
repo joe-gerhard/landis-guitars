@@ -11,7 +11,7 @@ const RepairForm = styled('div')<RepairFormProps>(({ theme, open }) => css`
   display: flex;
   flex-direction: column;
   background: white;
-  height: ${open ? '100vh' : 0};
+  height: ${open ? '90vh' : 0};
   overflow: ${open ? 'scroll' : 'hidden'};
   padding: 0 17px;
   transition: height .5s;
@@ -58,10 +58,6 @@ const Error = styled('div')<RepairFormProps>(({ theme, showError }) => css`
   font-size: 12px;
   padding: 5px 3px;
   min-height: 30px;
-
-  &:last-of-type {
-    margin-bottom: 20px;
-  }
 `);
 
 export const Styled = {
