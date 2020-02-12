@@ -18,8 +18,7 @@ const Footer = styled('footer')(({ theme }) => css`
 
   img {
     width: 92px;
-  }
-  
+  }  
 `);
 
 const ContactInfo = styled('div')(({ theme }) => css`
@@ -46,7 +45,8 @@ const SocialLinks = styled('div')(({ theme }) => css`
   margin-top: auto;
   display: flex;
   a {
-    margin: 0 10px;  
+    margin-right: 10px;
+    color: grey; 
   }
 `);
 
