@@ -3,15 +3,26 @@ import { Theme } from '../../styles/theme';
 
 type ReviewSectionProps = {
   theme: Theme;
+  selected?: boolean;
 }
 
 const ReviewSection = styled('section')<ReviewSectionProps>(({ theme }) => css`
+  background: #343434;
+`);
+
+const ReviewContainer = styled('div')<ReviewSectionProps>(({ theme }) => css`
   display: flex;
   overflow-x: scroll;
   background: #343434;
   scroll-snap-type: x mandatory;
 
+  ::-webkit-scrollbar {
+    width: 0px; 
+    background: transparent; 
+  }
+
 `);
+
 
 const Review = styled('div')<ReviewSectionProps>(({ theme }) => css`
   display: flex;
@@ -34,23 +45,28 @@ const Review = styled('div')<ReviewSectionProps>(({ theme }) => css`
 `);
 
 const Indicator = styled('div')<ReviewSectionProps>(({ theme }) => css`
-  background: #343434;
-  width: 100%;
+  width: 30px;
+  height: 30px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  margin: 0 auto;
 
-  div {
-    width: 6px;
-    height: 6px;
+`);
+
+const Dot = styled('div')<ReviewSectionProps>(({ theme, selected }) => css`
+    width: ${selected ? 8 : 6}px;
+    height: ${selected ? 8 : 6}px;
     margin: 2px;
     background: white;
     border-radius: 100%;
-  }
+    transition: .3s;
 `);
 
 export const Styled = {
   ReviewSection,
+  ReviewContainer,
   Review,
   Indicator,
+  Dot,
 }
