@@ -1,10 +1,11 @@
-import React, { useState, ChangeEvent } from 'react'
+import React, { useState, ChangeEvent, MutableRefObject } from 'react'
 import { Styled } from './styles'
 import { db } from '../../util/firebase'
 import Error from './Error';
 
 type RepairFormProps = {
   open: boolean; 
+  repairFormRef: MutableRefObject<null>;
 }
 
 type RepairFormState = {
@@ -39,7 +40,7 @@ const initialRepairFormErrors: RepairFormErrors = {
   email: '',
 }
 
-const RepairForm : React.FC<RepairFormProps> = ({ open }) => {
+const RepairForm : React.FC<RepairFormProps> = ({ open, repairFormRef }) => {
   
   const [ formState, setFormState ] = useState<RepairFormState>(initialRepairFormState)
   const [ errors, setErrors ] = useState<RepairFormErrors>(initialRepairFormErrors)
@@ -143,7 +144,7 @@ const RepairForm : React.FC<RepairFormProps> = ({ open }) => {
   }
 
   return (
-    <Styled.RepairForm open={open}>
+    <Styled.RepairForm ref={repairFormRef} open={open}>
       <h2>I'm stoked to help ya out.</h2>
       <p>
         Fill out the form below and we will reach out to find a time 

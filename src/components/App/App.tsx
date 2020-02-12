@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, MutableRefObject } from 'react';
 import { Styled } from './styles';
 import Header from '../Header';
 import MenuBar from '../MenuBar';
@@ -12,6 +12,18 @@ import RepairForm from '../RepairForm';
 const App = () => {
 
   const [ repairFormOpen, setRepairFormOpen ] = useState<boolean>(false);
+  const repairFormRef: MutableRefObject<any> = useRef(null);
+
+  const handleClickRepairFormButton = (): void => {
+    setRepairFormOpen(!repairFormOpen);
+
+    if(!repairFormOpen) {
+      window.scrollTo({
+        top: repairFormRef.current.offsetTop,
+        behavior: 'smooth',
+      })
+    }
+  }
   
   return (
     <Styled.App>
@@ -23,9 +35,9 @@ const App = () => {
        <p>
         Complete the guitar repair form following the link below.
        </p>
-       <button onClick={() => setRepairFormOpen(!repairFormOpen)}>Repair Form</button>
+       <button onClick={handleClickRepairFormButton}>Repair Form</button>
      </Card>
-     <RepairForm open={repairFormOpen}/>
+     <RepairForm repairFormRef={repairFormRef} open={repairFormOpen}/>
      <Card>
        <h2>Step 2</h2>
        <p>

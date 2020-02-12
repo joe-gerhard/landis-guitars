@@ -11,7 +11,7 @@ const RepairForm = styled('div')<RepairFormProps>(({ theme, open }) => css`
   display: flex;
   flex-direction: column;
   background: white;
-  height: ${open ? 'calc(100vh - 166px)' : 0};
+  height: ${open ? '100vh' : 0};
   overflow: ${open ? 'scroll' : 'hidden'};
   padding: 0 17px;
   transition: height .5s;
