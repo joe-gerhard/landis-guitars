@@ -36,6 +36,8 @@ const Dropdown = styled('nav')<MenuBarProps>(({ theme, open }) => css`
     transition: .3s;
     color: white;
     text-decoration: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
 `);
 
