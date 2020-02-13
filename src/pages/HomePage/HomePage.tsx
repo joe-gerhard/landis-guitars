@@ -1,15 +1,12 @@
 import React, { useState, useRef, MutableRefObject } from 'react';
 import { Styled } from './styles';
-import Header from '../Header';
-import MenuBar from '../MenuBar';
-import AboutSection from '../AboutSection';
-import Card from '../Card';
-import ServicesSection from '../ServicesSection';
-import ReviewSection from '../ReviewSection/ReviewSection';
-import Footer from '../Footer';
-import RepairForm from '../RepairForm';
+import AboutSection from '../../components/AboutSection';
+import Card from '../../components/Card';
+import ServicesSection from '../../components/ServicesSection';
+import ReviewSection from '../../components/ReviewSection/ReviewSection';
+import RepairForm from '../../components/RepairForm';
 
-const App = () => {
+const HomePage = () => {
 
   const [ repairFormOpen, setRepairFormOpen ] = useState<boolean>(false);
   const repairFormRef: MutableRefObject<any> = useRef(null);
@@ -26,9 +23,7 @@ const App = () => {
   }
   
   return (
-    <Styled.App>
-     <Header />
-     <MenuBar />
+    <Styled.HomePage>
      <AboutSection />
      <Card>
        <h2>Step 1</h2>
@@ -56,9 +51,8 @@ const App = () => {
      </Card>
      <ServicesSection />
      <ReviewSection />
-     <Footer />
-    </Styled.App>
+    </Styled.HomePage>
   );
 }
 
-export default App;
+export default HomePage;

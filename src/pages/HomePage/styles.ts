@@ -1,14 +1,14 @@
 import styled, { css } from 'styled-components';
 import { Theme } from '../../styles/theme';
 
-type AppProps = {
+type HomePageProps = {
   theme: Theme;
 }
 
-const App = styled('div')<AppProps>(({ theme }) => css`
+const HomePage = styled('main')<HomePageProps>(({ theme }) => css`
  
 `);
 
 export const Styled = {
-  App,
+  HomePage,
 }
