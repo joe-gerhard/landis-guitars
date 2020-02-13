@@ -7,8 +7,8 @@ const MenuBar: React.FC = () => {
   const [ menuOpen, setMenuOpen ] = useState<boolean>(false);
 
   return (
-    <Styled.MenuBarContainer>
-      <Styled.MenuBar onClick={() => setMenuOpen(!menuOpen)}>
+    <Styled.MenuBarContainer onClick={() => setMenuOpen(!menuOpen)}>
+      <Styled.MenuBar>
         Menu
       </Styled.MenuBar>
       <Styled.Dropdown open={menuOpen}>
