@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Styled } from './styles';
+import { Link } from 'react-router-dom';
 
 const MenuBar: React.FC = () => {
 
@@ -11,9 +12,10 @@ const MenuBar: React.FC = () => {
         Menu
       </Styled.MenuBar>
       <Styled.Dropdown open={menuOpen}>
-        <span>About</span>
-        <span>Blog</span>
-        <span>Events</span>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/blog">Blog</Link>
+        <Link to="/events">Events</Link>
       </Styled.Dropdown>
     </Styled.MenuBarContainer>
   )

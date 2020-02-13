@@ -5,6 +5,9 @@ import Header from '../components/Header';
 import MenuBar from '../components/MenuBar';
 import Footer from '../components/Footer';
 import HomePage from '../pages/HomePage';
+import AboutPage from '../pages/AboutPage';
+import BlogPage from '../pages/BlogPage';
+import EventsPage from '../pages/EventsPage';
 
 const App = () => {
   
@@ -13,10 +16,10 @@ const App = () => {
      <Header />
      <MenuBar />
      <Switch>
+      <Route path="/about" component={AboutPage} />
+      <Route path="/blog" component={BlogPage} />
+      <Route path="/events" component={EventsPage} />
       <Route path="/" component={HomePage} />
-      <Route path="/about" component={HomePage} />
-      <Route path="/blog" component={HomePage} />
-      <Route path="/events" component={HomePage} />
      </Switch>
      <Footer />
     </Styled.App>

@@ -31,9 +31,11 @@ const Dropdown = styled('nav')<MenuBarProps>(({ theme, open }) => css`
   transition: .5s;
   overflow: hidden;
 
-  span {
+  a {
     opacity: ${open ? 1 : 0};
     transition: .3s;
+    color: white;
+    text-decoration: none;
   }
 `);
 
