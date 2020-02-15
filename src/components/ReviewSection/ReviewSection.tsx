@@ -6,9 +6,10 @@ import { throttle } from '../../util/helpers';
 const ReviewSection = () => {
 
   const [ indicator, setIndicator ] = useState<number>(0);
+  const [ prevScrollPosition, setPrevScrollPosition ] = useState<number>(0);
   const reviewRef: React.MutableRefObject<null | HTMLDivElement> = useRef(null);
 
-  const handleScroll: React.EventHandler<React.UIEvent<HTMLDivElement>> = (e): void => {
+  const handleScroll: React.EventHandler<React.UIEvent<HTMLDivElement>> = (): void => {
 
     if(reviewRef.current) {
 
@@ -16,22 +17,22 @@ const ReviewSection = () => {
       const scrollLeft: number = reviewRef.current.scrollLeft;
       const numReviews: number = 3
       const scrollPosition: number = (scrollLeft / scrollWidth * numReviews);
+      const scrollingRight: boolean = scrollPosition > prevScrollPosition; 
 
-      if(scrollPosition > 1.5) {
-        setIndicator(2)
+      if(scrollPosition < 1) {
+        scrollingRight ? setIndicator(1) : setIndicator(0);
       }
-      else if(scrollPosition > .5) {
-        setIndicator(1)
+      else if(scrollPosition < 2 && scrollPosition !== 1) {
+        scrollingRight ? setIndicator(2) : setIndicator(1);
       }
-      else {
-        setIndicator(0)
-      }
+
+      setPrevScrollPosition(scrollPosition);
     }
   }
 
   return (
     <Styled.ReviewSection>
-      <Styled.ReviewContainer ref={reviewRef} onScroll={throttle(handleScroll, 100)}>
+      <Styled.ReviewContainer ref={reviewRef} onScroll={throttle(handleScroll, 200)}>
         <Styled.Review>
           <p>
             “Great work and fast turn around! Best guitar set up I’ve 
