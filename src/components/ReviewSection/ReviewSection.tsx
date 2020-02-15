@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { Styled } from './styles'
 import Indicator from './Indicator';
 
@@ -7,41 +7,36 @@ const ReviewSection = () => {
   const [ indicator, setIndicator ] = useState<number>(0);
   const [ prevScrollPosition, setPrevScrollPosition ] = useState<number>(0);
   const [ ready, setReady ] = useState<boolean>(true);
-  const reviewRef: React.MutableRefObject<null | HTMLDivElement> = useRef(null);
 
   const handleScroll: React.EventHandler<React.UIEvent<HTMLDivElement>> = (e): void => {
 
-    if(reviewRef.current) {
+    const scrollWidth: number = e.currentTarget.scrollWidth;
+    const scrollLeft: number = e.currentTarget.scrollLeft;
+    const numReviews: number = 3;
+    const scrollPosition: number = (scrollLeft / scrollWidth * numReviews);
+    const scrollingRight: boolean = scrollPosition > prevScrollPosition; 
 
-      const scrollWidth: number = reviewRef.current.scrollWidth;
-      const scrollLeft: number = reviewRef.current.scrollLeft;
-      const numReviews: number = 3;
-      const scrollPosition: number = (scrollLeft / scrollWidth * numReviews);
-      const scrollingRight: boolean = scrollPosition > prevScrollPosition; 
+    if(ready) {
 
-      if(ready) {
-
-        if(scrollPosition < 1) {
-          scrollingRight ? setIndicator(1) : setIndicator(0);
-        }
-        else if(scrollPosition < 2 && scrollPosition !== 1) {
-          scrollingRight ? setIndicator(2) : setIndicator(1);
-        }
-  
-        setPrevScrollPosition(scrollPosition);
-        setReady(false);
-        setTimeout(() => {
-          setReady(true);
-        }, 100)
+      if(scrollPosition < 1) {
+        scrollingRight ? setIndicator(1) : setIndicator(0);
+      }
+      else if(scrollPosition < 2 && scrollPosition !== 1) {
+        scrollingRight ? setIndicator(2) : setIndicator(1);
       }
 
-    
+      setPrevScrollPosition(scrollPosition);
+      setReady(false);
+
+      setTimeout(() => {
+        setReady(true);
+      }, 100)
     }
   }
 
   return (
     <Styled.ReviewSection>
-      <Styled.ReviewContainer ref={reviewRef} onScroll={handleScroll}>
+      <Styled.ReviewContainer onScroll={handleScroll}>
         <Styled.Review>
           <p>
             “Great work and fast turn around! Best guitar set up I’ve 
