@@ -2,15 +2,14 @@ export const throttle = (func: Function, timeout: number) => {
 
   let ready: boolean = true;
 
-  return () => {
-    if (!ready) {
-      return;
+  return (...args: any[]) => {
+    if (ready) {
+      ready = false;
+      func(...args);
+      setTimeout(() => {
+        ready = true;
+      }, timeout);
+    };
     }
 
-    ready = false;
-    func();
-    setTimeout(() => {
-      ready = true;
-    }, timeout);
-  };
 }
