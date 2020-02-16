@@ -7,7 +7,10 @@ type EventsPageProps = {
 }
 
 const EventsPage: FC = styled('main')<EventsPageProps>(({ theme }) => css`
-  
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 `);
 
 export const Styled = {

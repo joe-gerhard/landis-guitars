@@ -1,10 +1,11 @@
 import React from 'react'
+import { Styled } from './styles'
 
 const AboutPage = () => {
   return (
-    <div>
+    <Styled.AboutPage>
       This is the about page.
-    </div>
+    </Styled.AboutPage>
   )
 }
 

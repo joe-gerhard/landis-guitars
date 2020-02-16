@@ -1,10 +1,11 @@
 import React from 'react'
+import { Styled } from './styles'
 
 const BlogPage = () => {
   return (
-    <div>
+    <Styled.BlogPage>
       This is the blog page.
-    </div>
+    </Styled.BlogPage>
   )
 }
 

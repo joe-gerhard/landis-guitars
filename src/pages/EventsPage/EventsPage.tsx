@@ -1,10 +1,11 @@
 import React from 'react'
+import { Styled } from './styles'
 
 const EventsPage = () => {
   return (
-    <div>
+    <Styled.EventsPage>
       This is the events page.
-    </div>
+    </Styled.EventsPage>
   )
 }
 

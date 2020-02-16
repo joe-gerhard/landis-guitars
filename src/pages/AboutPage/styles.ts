@@ -7,7 +7,10 @@ type AboutPageProps = {
 }
 
 const AboutPage: FC = styled('main')<AboutPageProps>(({ theme }) => css`
-  
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 `);
 
 export const Styled = {

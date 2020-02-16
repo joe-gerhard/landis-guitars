@@ -7,7 +7,10 @@ type BlogPageProps = {
 }
 
 const BlogPage: FC = styled('main')<BlogPageProps>(({ theme }) => css`
-  
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 `);
 
 export const Styled = {
