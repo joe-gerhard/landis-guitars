@@ -44,6 +44,7 @@ const RepairForm : React.FC<RepairFormProps> = ({ open, repairFormRef }) => {
   
   const [ formState, setFormState ] = useState<RepairFormState>(initialRepairFormState)
   const [ errors, setErrors ] = useState<RepairFormErrors>(initialRepairFormErrors)
+  const [ sent, setSent ] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
 
@@ -135,35 +136,45 @@ const RepairForm : React.FC<RepairFormProps> = ({ open, repairFormRef }) => {
         ...formState,
         date: new Date().toLocaleString()
       })
-  
-      setFormState(initialRepairFormState);
-    }
-    else {
-      console.log('please complete form')
+
+      setSent(true)
+      setFormState({
+        ...formState,
+        note: ''
+      });
     }
   }
 
   return (
     <Styled.RepairForm ref={repairFormRef} open={open}>
-      <h2>I'm stoked to help ya out.</h2>
-      <p>
-        Fill out the form below and we will reach out to find a time 
-        that works for you to bring your baby in and talk shop.
-      </p>
-      <input name="firstName" value={formState.firstName} type="text" placeholder="First name" onChange={handleChange} />
-      <Error error={errors.firstName} />
-      <input name="lastName" value={formState.lastName} type="text" placeholder="Last name" onChange={handleChange} />
-      <Error error={errors.lastName} />
-      <input name="phoneNumber" value={formState.phoneNumber} type="text" placeholder="Phone" onChange={handleChangePhoneNumber} />
-      <Error error={errors.phoneNumber} />
-      <input name="email" value={formState.email} type="text" placeholder="Email" onChange={handleChange} />
-      <Error error={errors.email} />
-      <p>
-        Give me an idea of what’s going on with your guitar and I will 
-        get right back. 
-      </p>
-      <textarea name="note" value={formState.note} placeholder="Note" onChange={handleChange}></textarea>
-      <button onClick={handleSubmitFormData}>Send it!</button>
+      {sent ? 
+        <>
+          <h2>Thanks! We'll get back to you soon!</h2>
+          <button onClick={() => setSent(false)}>Send Another Message</button>
+        </>
+      :
+      <>
+        <h2>I'm stoked to help ya out.</h2>
+        <p>
+          Fill out the form below and we will reach out to find a time 
+          that works for you to bring your baby in and talk shop.
+        </p>
+        <input name="firstName" value={formState.firstName} type="text" placeholder="First name" onChange={handleChange} />
+        <Error error={errors.firstName} />
+        <input name="lastName" value={formState.lastName} type="text" placeholder="Last name" onChange={handleChange} />
+        <Error error={errors.lastName} />
+        <input name="phoneNumber" value={formState.phoneNumber} type="text" placeholder="Phone" onChange={handleChangePhoneNumber} />
+        <Error error={errors.phoneNumber} />
+        <input name="email" value={formState.email} type="text" placeholder="Email" onChange={handleChange} />
+        <Error error={errors.email} />
+        <p>
+          Give me an idea of what’s going on with your guitar and I will 
+          get right back. 
+        </p>
+        <textarea name="note" value={formState.note} placeholder="Note" onChange={handleChange}></textarea>
+        <button onClick={handleSubmitFormData}>Send it!</button>
+      </>
+      }
     </Styled.RepairForm>
   )
 }
