@@ -5,13 +5,14 @@ type RepairFormProps = {
   theme: Theme;
   open?: boolean;
   showError?: string;
+  height?: number;
 }
 
-const RepairForm = styled('div')<RepairFormProps>(({ theme, open }) => css`
+const RepairForm = styled('div')<RepairFormProps>(({ theme, open, height }) => css`
   display: flex;
   flex-direction: column;
   background: white;
-  height: ${open ? '90vh' : 0};
+  height: ${open ? (height ? height + 'px' : '90vh') : 0};
   overflow: ${open ? 'scroll' : 'hidden'};
   padding: 0 17px;
   transition: height .5s;

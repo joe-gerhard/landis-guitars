@@ -45,6 +45,7 @@ const RepairForm : React.FC<RepairFormProps> = ({ open, repairFormRef }) => {
   const [ formState, setFormState ] = useState<RepairFormState>(initialRepairFormState)
   const [ errors, setErrors ] = useState<RepairFormErrors>(initialRepairFormErrors)
   const [ sent, setSent ] = useState<boolean>(false);
+  const [ height, setHeight ] = useState<number | undefined>(undefined);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
 
@@ -137,7 +138,8 @@ const RepairForm : React.FC<RepairFormProps> = ({ open, repairFormRef }) => {
         date: new Date().toLocaleString()
       })
 
-      setSent(true)
+      setSent(true);
+      setHeight(150);
       setFormState({
         ...formState,
         note: ''
@@ -145,12 +147,17 @@ const RepairForm : React.FC<RepairFormProps> = ({ open, repairFormRef }) => {
     }
   }
 
+  const handleSendAnotherMessage = (): void => {
+    setHeight(undefined);
+    setSent(false);
+  }
+
   return (
-    <Styled.RepairForm ref={repairFormRef} open={open}>
+    <Styled.RepairForm ref={repairFormRef} open={open} height={height}>
       {sent ? 
         <>
-          <h2>Thanks! We'll get back to you soon!</h2>
-          <button onClick={() => setSent(false)}>Send Another Message</button>
+          <h2>Thanks! I'll get back to you soon!</h2>
+          <button onClick={handleSendAnotherMessage}>Send Another Message</button>
         </>
       :
       <>
